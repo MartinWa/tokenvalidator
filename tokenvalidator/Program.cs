@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Configuration;
+using System.IdentityModel;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
@@ -28,12 +28,15 @@ namespace tokenvalidator
                     ValidIssuer = domain,
                     ValidAudiences = new[] { audience },
                     IssuerSigningToken = configuration.SigningTokens.FirstOrDefault(x => x is NamedKeySecurityToken)
-                //    IssuerSigningTokens = configuration.SigningTokens
+                    //    IssuerSigningTokens = configuration.SigningTokens
                 };
                 var handler = new JwtSecurityTokenHandler();
-                var can = handler.CanValidateToken;
                 var user = handler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
                 Console.WriteLine($"Token is validated. User Id {user?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value}");
+            }
+            catch (SignatureVerificationFailedException svfe)
+            {
+                Console.WriteLine($"Error occurred while validating token: {svfe.Message}");
             }
             catch (Exception e)
             {
