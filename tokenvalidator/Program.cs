@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
+using System.Threading;
+using Local.IdentityModel.Extensions.Configuration;
+using Local.IdentityModel.Tokens;
 
 namespace tokenvalidator
 {
@@ -13,29 +13,29 @@ namespace tokenvalidator
         {
             const string domain = "https://www.test.vegvesen.no:443/openam/oauth2/employees";
             const string audience = "ComAround";
-            const string token = "eyJ0eXAiOiJKV1QiLCJraWQiOiJDanhYcUhFYlpvWEdYNkRHTE4xZzRaY1hCWTQ9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJURVNUMTAiLCJhdWRpdFRyYWNraW5nSWQiOiJiYjA1OWRmZS03OGEwLTRmMmItYTNhZC02NGE2N2Q2YmQxYjYiLCJpc3MiOiJodHRwczovL3d3dy50ZXN0LnZlZ3Zlc2VuLm5vOjQ0My9vcGVuYW0vb2F1dGgyL2VtcGxveWVlcyIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6ImQ4NmQxODFhLTUzNDctNDFhOS1hNTkzLTA3MzJhZWUwMDYxZiIsImF1ZCI6IkNvbUFyb3VuZCIsIm5iZiI6MTUwNzk5MTA3Niwic2NvcGUiOlsic3Z2cHJvZmlsZSIsIm9wZW5pZCJdLCJhdXRoX3RpbWUiOjE1MDc5OTEwNzYsInJlYWxtIjoiL0VtcGxveWVlcyIsImV4cCI6MTUwODAxOTg3NiwiaWF0IjoxNTA3OTkxMDc2LCJleHBpcmVzX2luIjoyODgwMDAwMCwianRpIjoiYWIzM2M2ZTYtMTgzZC00MzAxLWJjNTQtMmZlNWU0YmQyYTJmIn0.PhPluEwRQ3ggkxqzReRyWzztF00tQFqfwPt4ENH0PFPCSI_-Kt3148-uCUsCpe5mpkoRaMnhiuYacX5qZ-0vK6d1oPNIcxwbhqmqN3XXF07YwTn196K7bDS9xxIDXHQ8bynlqeRY6xNNfT9__vQwDYwrz_R2BdjePJnGN2GDRujY7VKwel32T4Lb7XG4Q6mpzPzO0A8BmXeUxUObpb5P2Uzkav-lMNGonucxKOcLEWEVt0-zaZnyibS5Ps6DENccVsnLXDMXXI7o8UBiQ46DCSTgwi4drdg4YfMMvITl_wMo4bt_xXPJ3_mdR8VRJS11hzsNfQWfiVJWz-kRGO7s3Q";
-            var rsa = new RSACryptoServiceProvider();
-            rsa.ImportParameters(new RSAParameters
-            {
-                Modulus = FromBase64Url("3-f4dQItaX04RceIkb62Xy8Xti17FyeYOdUEZYuoMBOOjPN1mWwaZhKQzsjN-YpkNJ4FckhkwOVZg0jHXwoPt4pz98Z95MoXLRp4VtnF0mL5fjrvqqN4x_SGRID84aEjK8yOSxhlweHEAq7WvgxVVGVrrviAXILGWe5HxwtXherJmwbdC-NxIrvDftlVGRU0Mg0fsQ_CcMLgJk97zU-hlZyRrUo1VvNNCM2pUMUCctgilh3cGEagg7mjge3K6BWAIkR8dm1j9smk_WFPgeg9R_yo3ufAlyHfgOGrwEnjJ27LsDvSqWVxhyHKxpS9xg8mSE6L1sUgsrnU21IudNwfhw"),
-                Exponent = FromBase64Url("AQAB")
-            });
-            var key = new RsaSecurityKey(rsa);
-          //  var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>($"{domain}/.well-known/openid-configuration");
-         //   var configuration = AsyncHelper.RunSync(async () => await configurationManager.GetConfigurationAsync(CancellationToken.None));
+            const string token = "eyJ0eXAiOiJKV1QiLCJraWQiOiJDanhYcUhFYlpvWEdYNkRHTE4xZzRaY1hCWTQ9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJURVNUMTAiLCJhdWRpdFRyYWNraW5nSWQiOiIzZDJkNTVlZS1hNmEzLTRmNDgtYjM3MC0yZDkwNmM2MzA4NGQiLCJpc3MiOiJodHRwczovL3d3dy50ZXN0LnZlZ3Zlc2VuLm5vOjQ0My9vcGVuYW0vb2F1dGgyL2VtcGxveWVlcyIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6IjFkN2M0OWQ0LWM4OTItNDYxZS1iMGQ2LWIzZDNjMDk4ZDZiZSIsImF1ZCI6IkNvbUFyb3VuZCIsIm5iZiI6MTUwODAyMjM0Niwic2NvcGUiOlsic3Z2cHJvZmlsZSIsIm9wZW5pZCJdLCJhdXRoX3RpbWUiOjE1MDgwMjIzNDYsInJlYWxtIjoiL0VtcGxveWVlcyIsImV4cCI6MTUwODA1MTE0NiwiaWF0IjoxNTA4MDIyMzQ2LCJleHBpcmVzX2luIjoyODgwMDAwMCwianRpIjoiNzE3Yzk0YTYtNDdmOS00MzlhLWEwNzQtMjI4MjYyMTBiMzc5In0.kY2T0pAWopjsOmajjscXeI8HgrrQ8-e6LZprn9_LgSPRfYq5crUMxJ70rLawEMnpIkv7KEvNO3yfJNYTbif3miztbY5ipEN9CHE-2UBZqTv_A5i2-lvq52UDo4D10BL45j3ULW4VpqI_hu_JWCRxJrE5lt4AoLRywWJvdIHuaQ49krzANb2pzvZT0mwVwB0XfiwmwHCZ8uHAhVaxx9JtdiDyhfpLBstqjUpp1tfpJRpzjoqCcvKeUM7FmtnUnG6QMTTerixqBSveKEjL2naKnF7h7m4p6WjsA5POYK3Dpra12SPQ-iflr_8MbcIyVxMtj_yhCdUWAglHOPoxb0RG7Q";
+            //var rsa = new RSACryptoServiceProvider();
+            //rsa.ImportParameters(new RSAParameters
+            //{
+            //    Modulus = FromBase64Url("3-f4dQItaX04RceIkb62Xy8Xti17FyeYOdUEZYuoMBOOjPN1mWwaZhKQzsjN-YpkNJ4FckhkwOVZg0jHXwoPt4pz98Z95MoXLRp4VtnF0mL5fjrvqqN4x_SGRID84aEjK8yOSxhlweHEAq7WvgxVVGVrrviAXILGWe5HxwtXherJmwbdC-NxIrvDftlVGRU0Mg0fsQ_CcMLgJk97zU-hlZyRrUo1VvNNCM2pUMUCctgilh3cGEagg7mjge3K6BWAIkR8dm1j9smk_WFPgeg9R_yo3ufAlyHfgOGrwEnjJ27LsDvSqWVxhyHKxpS9xg8mSE6L1sUgsrnU21IudNwfhw"),
+            //    Exponent = FromBase64Url("AQAB")
+            //});
+            //var key = new RsaSecurityKey(rsa);
+            var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>($"{domain}/.well-known/openid-configuration");
+            var configuration = AsyncHelper.RunSync(async () => await configurationManager.GetConfigurationAsync(CancellationToken.None));
          //   var issuerSigningToken = configuration.SigningTokens.FirstOrDefault(x => x is NamedKeySecurityToken);
-            var issuerSigningToken2 = new NamedKeySecurityToken("kid", "CjxXqHEbZoXGX6DGLN1g4ZcXBY4==", key);
+         //   var issuerSigningToken2 = new NamedKeySecurityToken("kid", "CjxXqHEbZoXGX6DGLN1g4ZcXBY4==", key);
             var validationParameters = new TokenValidationParameters
             {
                 ValidIssuer = domain,
                 ValidAudience = audience,
-                IssuerSigningToken = issuerSigningToken2,
-                //IssuerSigningTokens = configuration.SigningTokens,
-                IssuerSigningKeyValidator = IssuerSigningKeyValidator,
-                IssuerValidator = IssuerValidator,
-                AudienceValidator = AudienceValidator,
-                LifetimeValidator = LifetimeValidator,
-                IssuerSigningKeyResolver = IssuerSigningKeyResolver
+           //     IssuerSigningToken = issuerSigningToken2,
+                IssuerSigningTokens = configuration.SigningTokens,
+                //IssuerSigningKeyValidator = IssuerSigningKeyValidator,
+                //IssuerValidator = IssuerValidator,
+                //AudienceValidator = AudienceValidator,
+                //LifetimeValidator = LifetimeValidator,
+               // IssuerSigningKeyResolver = IssuerSigningKeyResolver
             };
 
             try
@@ -92,40 +92,40 @@ namespace tokenvalidator
             Console.WriteLine();
         }
 
-        private static byte[] FromBase64Url(string base64Url)
-        {
-            var padded = base64Url.Length % 4 == 0 ? base64Url : base64Url + "====".Substring(base64Url.Length % 4);
-            var base64 = padded.Replace("_", "/").Replace("-", "+");
-            return Convert.FromBase64String(base64);
-        }
+        //private static byte[] FromBase64Url(string base64Url)
+        //{
+        //    var padded = base64Url.Length % 4 == 0 ? base64Url : base64Url + "====".Substring(base64Url.Length % 4);
+        //    var base64 = padded.Replace("_", "/").Replace("-", "+");
+        //    return Convert.FromBase64String(base64);
+        //}
 
-        private static bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters parameters)
-        {
+        //private static bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters parameters)
+        //{
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private static bool AudienceValidator(IEnumerable<string> audiences, SecurityToken securityToken, TokenValidationParameters parameters)
-        {
-            return true;
-        }
+        //private static bool AudienceValidator(IEnumerable<string> audiences, SecurityToken securityToken, TokenValidationParameters parameters)
+        //{
+        //    return true;
+        //}
 
-        private static string IssuerValidator(string issuer, SecurityToken securityToken, TokenValidationParameters parameters)
-        {
-            return "";
-        }
+        //private static string IssuerValidator(string issuer, SecurityToken securityToken, TokenValidationParameters parameters)
+        //{
+        //    return "";
+        //}
 
-        private static void IssuerSigningKeyValidator(SecurityKey securityKey)
-        {
-            return;
-        }
+        //private static void IssuerSigningKeyValidator(SecurityKey securityKey)
+        //{
+        //    return;
+        //}
 
-        private static SecurityKey IssuerSigningKeyResolver(string s, SecurityToken securityToken, SecurityKeyIdentifier keyIdentifier, TokenValidationParameters parameters)
-        {
+        //private static SecurityKey IssuerSigningKeyResolver(string s, SecurityToken securityToken, SecurityKeyIdentifier keyIdentifier, TokenValidationParameters parameters)
+        //{
 
-            var key = parameters?.IssuerSigningToken?.SecurityKeys?.FirstOrDefault();
-            return key;
-        }
+        //    var key = parameters?.IssuerSigningToken?.SecurityKeys?.FirstOrDefault();
+        //    return key;
+        //}
 
       
 
