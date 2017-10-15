@@ -30,8 +30,4 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LocalCore.IdentityModel.Tokens\System.LocalCore.IdentityModel.Tokens.csproj" />
-  </ItemGroup>
-
 </Project>

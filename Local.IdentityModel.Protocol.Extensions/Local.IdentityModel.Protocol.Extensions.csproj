@@ -104,11 +104,6 @@
     <Compile Include="Configuration\WsFederationConfigurationRetriever.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Local.IdentityModel.Protocol.Extensions.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

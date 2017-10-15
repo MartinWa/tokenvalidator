@@ -9,12 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Local.IdentityModel.Tokens.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Local.IdentityModel.Protocol.Extensions", "Local.IdentityModel.Protocol.Extensions\Local.IdentityModel.Protocol.Extensions.csproj", "{1070AA57-ABCD-44DB-B212-B90880DBD261}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tokenvalidatorcore", "tokenvalidatorcore\tokenvalidatorcore.csproj", "{E8394785-B5C6-45B1-BBDB-0ACB6B539389}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalCore.IdentityModel.Tokens.Jwt", "LocalCore.IdentityModel.Tokens.Jwt\LocalCore.IdentityModel.Tokens.Jwt.csproj", "{0872AC66-556C-43C1-B041-F257C400AB9B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.LocalCore.IdentityModel.Tokens", "LocalCore.IdentityModel.Tokens\System.LocalCore.IdentityModel.Tokens.csproj", "{A29AA06B-3404-4663-AC40-30AD7EDD5A2B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,18 +27,6 @@ Global
 		{1070AA57-ABCD-44DB-B212-B90880DBD261}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1070AA57-ABCD-44DB-B212-B90880DBD261}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1070AA57-ABCD-44DB-B212-B90880DBD261}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8394785-B5C6-45B1-BBDB-0ACB6B539389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8394785-B5C6-45B1-BBDB-0ACB6B539389}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8394785-B5C6-45B1-BBDB-0ACB6B539389}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8394785-B5C6-45B1-BBDB-0ACB6B539389}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0872AC66-556C-43C1-B041-F257C400AB9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0872AC66-556C-43C1-B041-F257C400AB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0872AC66-556C-43C1-B041-F257C400AB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0872AC66-556C-43C1-B041-F257C400AB9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A29AA06B-3404-4663-AC40-30AD7EDD5A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A29AA06B-3404-4663-AC40-30AD7EDD5A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A29AA06B-3404-4663-AC40-30AD7EDD5A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A29AA06B-3404-4663-AC40-30AD7EDD5A2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
