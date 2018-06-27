@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Local.IdentityModel.Tokens.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Local.IdentityModel.Protocol.Extensions", "Local.IdentityModel.Protocol.Extensions\Local.IdentityModel.Protocol.Extensions.csproj", "{1070AA57-ABCD-44DB-B212-B90880DBD261}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tokenvalidatorcore", "tokenvalidatorcore\tokenvalidatorcore.csproj", "{AC383B15-A66D-4984-B412-F0C4B400F295}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalCore.IdentityModel.Tokens.Jwt", "LocalCore.IdentityModel.Tokens.Jwt\LocalCore.IdentityModel.Tokens.Jwt.csproj", "{39F0E311-0DED-4D37-B4B9-3BB56E09166D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.LocalCore.IdentityModel.Tokens", "LocalCore.IdentityModel.Tokens\System.LocalCore.IdentityModel.Tokens.csproj", "{CA2FB935-5EDB-4536-B892-D2D451A2E006}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{1070AA57-ABCD-44DB-B212-B90880DBD261}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1070AA57-ABCD-44DB-B212-B90880DBD261}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1070AA57-ABCD-44DB-B212-B90880DBD261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC383B15-A66D-4984-B412-F0C4B400F295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC383B15-A66D-4984-B412-F0C4B400F295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC383B15-A66D-4984-B412-F0C4B400F295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC383B15-A66D-4984-B412-F0C4B400F295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39F0E311-0DED-4D37-B4B9-3BB56E09166D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F0E311-0DED-4D37-B4B9-3BB56E09166D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F0E311-0DED-4D37-B4B9-3BB56E09166D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F0E311-0DED-4D37-B4B9-3BB56E09166D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA2FB935-5EDB-4536-B892-D2D451A2E006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2FB935-5EDB-4536-B892-D2D451A2E006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2FB935-5EDB-4536-B892-D2D451A2E006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2FB935-5EDB-4536-B892-D2D451A2E006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
